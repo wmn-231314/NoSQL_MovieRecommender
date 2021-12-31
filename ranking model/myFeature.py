@@ -56,7 +56,7 @@ def str2seq(input_str: str):
 
 def main():
     train_filepath = "final_input.csv"
-    test_filepath = "final_input.csv"
+    test_filepath = "output_list.csv"
     train_data = pd.read_csv(train_filepath)
     test_data = pd.read_csv(test_filepath)
 
