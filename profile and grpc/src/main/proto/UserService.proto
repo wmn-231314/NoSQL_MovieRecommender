@@ -1,0 +1,46 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+option java_outer_classname = "UserGrpc";
+option objc_class_prefix = "GRT";
+package com.example.grpc;
+
+message UserRequest{
+  string session_id = 1;
+  uint64 user_id = 2;
+}
+
+message UserHistoryResponse{
+  repeated Rate rate = 1;
+}
+
+message Rate{
+  uint64 movie_id = 1;
+  float score = 2;
+  uint64 timestamp = 3;
+}
+
+message UserProfileResponse{
+  Profile profile = 1;
+}
+
+message Profile{
+  float avg_score = 1;
+  float var_score = 2;
+  uint64 total_watched = 3;
+  float frequency = 4;
+  string favor_genre = 5;
+  repeated Genre genre = 6;
+  repeated Rate rate = 7;
+}
+
+message Genre{
+  string genre_name = 1;
+  uint64 count = 2;
+}
+
+
+service UserService{
+  rpc GetUserHistory(UserRequest) returns (stream UserHistoryResponse);
+  rpc GetUserProfile(UserRequest) returns (stream UserProfileResponse);
+}
